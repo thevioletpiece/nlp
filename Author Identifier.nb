@@ -10,14 +10,19 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     21088,        618]
-NotebookOptionsPosition[     19606,        569]
-NotebookOutlinePosition[     19959,        585]
-CellTagsIndexPosition[     19916,        582]
+NotebookDataLength[     16847,        498]
+NotebookOptionsPosition[     15487,        450]
+NotebookOutlinePosition[     15840,        466]
+CellTagsIndexPosition[     15797,        463]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
 Notebook[{
+
+Cell[CellGroupData[{
+Cell["Functions", "Subsection",
+ CellChangeTimes->{{3.6607761540022087`*^9, 3.660776161361266*^9}}],
+
 Cell[BoxData[
  RowBox[{
   RowBox[{"splitList", "=", 
@@ -132,6 +137,133 @@ Cell[BoxData[
 
 Cell[BoxData[
  RowBox[{
+  RowBox[{"computeSimilarity", "[", 
+   RowBox[{"a_", ",", " ", "b_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", "words", "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"words", "=", 
+      RowBox[{"Complement", "[", 
+       RowBox[{"Join", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{"#", "[", 
+            RowBox[{"[", "1", "]"}], "]"}], "&"}], "/@", "a"}], ",", " ", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"#", "[", 
+            RowBox[{"[", "1", "]"}], "]"}], "&"}], "/@", "b"}]}], "]"}], 
+       "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{"Total", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"getValue", "[", 
+            RowBox[{"a", ",", " ", "#"}], "]"}], "*", 
+           RowBox[{"getValue", "[", 
+            RowBox[{"b", ",", " ", "#"}], "]"}]}], ")"}], "&"}], "/@", 
+        "words"}], "]"}], " ", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"N", "[", 
+      RowBox[{
+       RowBox[{"Total", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{"getValue", "[", 
+            RowBox[{"a", ",", " ", "#"}], "]"}], "*", 
+           RowBox[{"getValue", "[", 
+            RowBox[{"b", ",", " ", "#"}], "]"}]}], "&"}], "/@", "words"}], 
+        "]"}], "/", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"Sqrt", "[", 
+          RowBox[{"Total", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{"getValue", "[", 
+               RowBox[{"a", ",", " ", "#"}], "]"}], "*", 
+              RowBox[{"getValue", "[", 
+               RowBox[{"a", ",", " ", "#"}], "]"}]}], "&"}], "/@", "words"}], 
+           "]"}], "]"}], "*", 
+         RowBox[{"Sqrt", "[", 
+          RowBox[{"Total", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{"getValue", "[", 
+               RowBox[{"b", ",", " ", "#"}], "]"}], "*", 
+              RowBox[{"getValue", "[", 
+               RowBox[{"b", ",", " ", "#"}], "]"}]}], "&"}], "/@", "words"}], 
+           "]"}], "]"}]}], ")"}]}], "]"}]}]}], " ", "]"}]}]], "Input",
+ CellChangeTimes->{{3.660748101930065*^9, 3.6607481776034403`*^9}, {
+   3.660748376779057*^9, 3.6607484388740883`*^9}, {3.6607484805664797`*^9, 
+   3.660748480797279*^9}, {3.660748851179351*^9, 3.660748885862059*^9}, {
+   3.6607490140057373`*^9, 3.6607490177984743`*^9}, {3.660749112725018*^9, 
+   3.660749128613085*^9}, {3.660749198621635*^9, 3.660749202516472*^9}, {
+   3.660750312263023*^9, 3.660750320617276*^9}, 3.6607717649255857`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"determineAuthor", "[", "data_", "]"}], ":=", 
+  RowBox[{"Sort", "[", 
+   RowBox[{
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"vectorNames", "[", 
+         RowBox[{"[", "i", "]"}], "]"}], ",", " ", 
+        RowBox[{"computeSimilarity", "[", 
+         RowBox[{"data", ",", " ", 
+          RowBox[{"vectors", "[", 
+           RowBox[{"[", "i", "]"}], "]"}]}], "]"}]}], "}"}], ",", " ", 
+      RowBox[{"{", 
+       RowBox[{"i", ",", " ", "1", ",", " ", 
+        RowBox[{"Length", "[", "vectors", "]"}]}], "}"}]}], "]"}], ",", " ", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"#1", "[", 
+       RowBox[{"[", "2", "]"}], "]"}], ">", 
+      RowBox[{"#2", "[", 
+       RowBox[{"[", "2", "]"}], "]"}]}], " ", "&"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.660773075811767*^9, 3.660773094892591*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"measureAuthor", "[", 
+   RowBox[{"url_", ",", " ", "blockSize_", ",", " ", "blocks_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", "test", "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"test", "=", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"measureFrequency", "[", 
+         RowBox[{"url", ",", " ", 
+          RowBox[{"blockSize", "*", "#"}], ",", " ", "blockSize"}], "]"}], 
+        "&"}], "/@", 
+       RowBox[{"Range", "[", 
+        RowBox[{"1", ",", "blocks"}], "]"}]}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"determineAuthor", "[", "#", "]"}], "&"}], "/@", "test"}]}]}], 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.6607734108051147`*^9, 3.660773490048164*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Data", "Subsection",
+ CellChangeTimes->{{3.660776164336555*^9, 3.6607761686286173`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
   RowBox[{"twain", "=", 
    RowBox[{"measureFrequency", "[", 
     RowBox[{
@@ -222,78 +354,6 @@ Cell[BoxData[
 
 Cell[BoxData[
  RowBox[{
-  RowBox[{"computeSimilarity", "[", 
-   RowBox[{"a_", ",", " ", "b_"}], "]"}], ":=", 
-  RowBox[{"Module", "[", 
-   RowBox[{
-    RowBox[{"{", "words", "}"}], ",", "\[IndentingNewLine]", 
-    RowBox[{
-     RowBox[{"words", "=", 
-      RowBox[{"Complement", "[", 
-       RowBox[{"Join", "[", 
-        RowBox[{
-         RowBox[{
-          RowBox[{
-           RowBox[{"#", "[", 
-            RowBox[{"[", "1", "]"}], "]"}], "&"}], "/@", "a"}], ",", " ", 
-         RowBox[{
-          RowBox[{
-           RowBox[{"#", "[", 
-            RowBox[{"[", "1", "]"}], "]"}], "&"}], "/@", "b"}]}], "]"}], 
-       "]"}]}], ";", "\[IndentingNewLine]", 
-     RowBox[{"(*", " ", 
-      RowBox[{"Total", "[", 
-       RowBox[{
-        RowBox[{
-         RowBox[{"(", 
-          RowBox[{
-           RowBox[{"getValue", "[", 
-            RowBox[{"a", ",", " ", "#"}], "]"}], "*", 
-           RowBox[{"getValue", "[", 
-            RowBox[{"b", ",", " ", "#"}], "]"}]}], ")"}], "&"}], "/@", 
-        "words"}], "]"}], " ", "*)"}], "\[IndentingNewLine]", 
-     RowBox[{"N", "[", 
-      RowBox[{
-       RowBox[{"Total", "[", 
-        RowBox[{
-         RowBox[{
-          RowBox[{
-           RowBox[{"getValue", "[", 
-            RowBox[{"a", ",", " ", "#"}], "]"}], "*", 
-           RowBox[{"getValue", "[", 
-            RowBox[{"b", ",", " ", "#"}], "]"}]}], "&"}], "/@", "words"}], 
-        "]"}], "/", 
-       RowBox[{"(", 
-        RowBox[{
-         RowBox[{"Sqrt", "[", 
-          RowBox[{"Total", "[", 
-           RowBox[{
-            RowBox[{
-             RowBox[{
-              RowBox[{"getValue", "[", 
-               RowBox[{"a", ",", " ", "#"}], "]"}], "*", 
-              RowBox[{"getValue", "[", 
-               RowBox[{"a", ",", " ", "#"}], "]"}]}], "&"}], "/@", "words"}], 
-           "]"}], "]"}], "*", 
-         RowBox[{"Sqrt", "[", 
-          RowBox[{"Total", "[", 
-           RowBox[{
-            RowBox[{
-             RowBox[{
-              RowBox[{"getValue", "[", 
-               RowBox[{"b", ",", " ", "#"}], "]"}], "*", 
-              RowBox[{"getValue", "[", 
-               RowBox[{"b", ",", " ", "#"}], "]"}]}], "&"}], "/@", "words"}], 
-           "]"}], "]"}]}], ")"}]}], "]"}]}]}], " ", "]"}]}]], "Input",
- CellChangeTimes->{{3.660748101930065*^9, 3.6607481776034403`*^9}, {
-   3.660748376779057*^9, 3.6607484388740883`*^9}, {3.6607484805664797`*^9, 
-   3.660748480797279*^9}, {3.660748851179351*^9, 3.660748885862059*^9}, {
-   3.6607490140057373`*^9, 3.6607490177984743`*^9}, {3.660749112725018*^9, 
-   3.660749128613085*^9}, {3.660749198621635*^9, 3.660749202516472*^9}, {
-   3.660750312263023*^9, 3.660750320617276*^9}, 3.6607717649255857`*^9}],
-
-Cell[BoxData[
- RowBox[{
   RowBox[{"vectors", "=", 
    RowBox[{"{", 
     RowBox[{
@@ -312,260 +372,81 @@ Cell[BoxData[
       " ", "\"\<kafka\>\"", ",", " ", "\"\<grim\>\"", ",", " ", 
      "\"\<stoker\>\"", ",", " ", "\"\<joyce\>\""}], "}"}]}], ";"}]], "Input",
  CellChangeTimes->{{3.660771806686277*^9, 3.6607718450788527`*^9}, 
-   3.660771876473859*^9}],
+   3.660771876473859*^9}]
+}, Open  ]],
 
 Cell[CellGroupData[{
 
-Cell[BoxData[
- RowBox[{"Sort", "[", 
+Cell["Results", "Subsection",
+ CellChangeTimes->{{3.660776183947235*^9, 3.660776189728342*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"b", "=", 
+   RowBox[{"measureAuthor", "[", 
+    RowBox[{
+    "\"\<http://www.gutenberg.org/cache/epub/76/pg76.txt\>\"", ",", " ", 
+     "1000", ",", " ", "5"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
   RowBox[{
-   RowBox[{"Table", "[", 
-    RowBox[{
-     RowBox[{"{", 
-      RowBox[{
-       RowBox[{"vectorNames", "[", 
-        RowBox[{"[", "i", "]"}], "]"}], ",", " ", 
-       RowBox[{"computeSimilarity", "[", 
-        RowBox[{"test", ",", " ", 
-         RowBox[{"vectors", "[", 
-          RowBox[{"[", "i", "]"}], "]"}]}], "]"}]}], "}"}], ",", " ", 
-     RowBox[{"{", 
-      RowBox[{"i", ",", " ", "1", ",", " ", 
-       RowBox[{"Length", "[", "vectors", "]"}]}], "}"}]}], "]"}], ",", " ", 
-   RowBox[{
-    RowBox[{
-     RowBox[{"#1", "[", 
-      RowBox[{"[", "2", "]"}], "]"}], ">", 
-     RowBox[{"#2", "[", 
-      RowBox[{"[", "2", "]"}], "]"}]}], " ", "&"}]}], "]"}]], "Input",
- CellChangeTimes->{{3.6607717686585217`*^9, 3.660771802948936*^9}, {
-  3.660771848260859*^9, 3.660771961905386*^9}}],
+   RowBox[{"#", "[", 
+    RowBox[{"[", "1", "]"}], "]"}], "&"}], "/@", "b"}]}], "Input",
+ CellChangeTimes->{{3.6607760634317207`*^9, 3.66077606841602*^9}, {
+  3.660777457390993*^9, 3.6607774698000937`*^9}}],
 
 Cell[BoxData[
  RowBox[{"{", 
   RowBox[{
    RowBox[{"{", 
-    RowBox[{"\<\"kafka\"\>", ",", "0.9516143357432565`"}], "}"}], ",", 
+    RowBox[{"\<\"twain\"\>", ",", "0.9248102978998247`"}], "}"}], ",", 
    RowBox[{"{", 
-    RowBox[{"\<\"dickens\"\>", ",", "0.8945919788274933`"}], "}"}], ",", 
+    RowBox[{"\<\"twain\"\>", ",", "0.9222471451292918`"}], "}"}], ",", 
    RowBox[{"{", 
-    RowBox[{"\<\"grim\"\>", ",", "0.8871538372276597`"}], "}"}], ",", 
+    RowBox[{"\<\"twain\"\>", ",", "0.9347145123749651`"}], "}"}], ",", 
    RowBox[{"{", 
-    RowBox[{"\<\"stoker\"\>", ",", "0.8614213614972857`"}], "}"}], ",", 
+    RowBox[{"\<\"twain\"\>", ",", "0.9188488556662732`"}], "}"}], ",", 
    RowBox[{"{", 
-    RowBox[{"\<\"joyce\"\>", ",", "0.855542429032675`"}], "}"}], ",", 
-   RowBox[{"{", 
-    RowBox[{"\<\"twain\"\>", ",", "0.8180291993561168`"}], "}"}], ",", 
-   RowBox[{"{", 
-    RowBox[{"\<\"tolstoy\"\>", ",", "0.8001732444193485`"}], "}"}]}], 
+    RowBox[{"\<\"twain\"\>", ",", "0.9437779293421561`"}], "}"}]}], 
   "}"}]], "Output",
- CellChangeTimes->{3.66077210853258*^9}]
+ CellChangeTimes->{3.660776564315464*^9, 3.660778206661928*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
-Cell[BoxData[
- RowBox[{"Sort", "[", 
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"b", "=", 
+   RowBox[{"measureAuthor", "[", 
+    RowBox[{
+    "\"\<http://www.gutenberg.org/cache/epub/345/pg345.txt\>\"", ",", " ", 
+     "1000", ",", " ", "5"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
   RowBox[{
-   RowBox[{"Table", "[", 
-    RowBox[{
-     RowBox[{"{", 
-      RowBox[{
-       RowBox[{"vectorNames", "[", 
-        RowBox[{"[", "i", "]"}], "]"}], ",", " ", 
-       RowBox[{"computeSimilarity", "[", 
-        RowBox[{"test2", ",", " ", 
-         RowBox[{"vectors", "[", 
-          RowBox[{"[", "i", "]"}], "]"}]}], "]"}]}], "}"}], ",", " ", 
-     RowBox[{"{", 
-      RowBox[{"i", ",", " ", "1", ",", " ", 
-       RowBox[{"Length", "[", "vectors", "]"}]}], "}"}]}], "]"}], ",", " ", 
-   RowBox[{
-    RowBox[{
-     RowBox[{"#1", "[", 
-      RowBox[{"[", "2", "]"}], "]"}], ">", 
-     RowBox[{"#2", "[", 
-      RowBox[{"[", "2", "]"}], "]"}]}], " ", "&"}]}], "]"}]], "Input",
- CellChangeTimes->{3.660771986564766*^9}],
+   RowBox[{"#", "[", 
+    RowBox[{"[", "1", "]"}], "]"}], "&"}], "/@", "b"}]}], "Input",
+ CellChangeTimes->{{3.6607760634317207`*^9, 3.66077606841602*^9}, {
+  3.660777457390993*^9, 3.6607774698000937`*^9}, {3.660778353076182*^9, 
+  3.660778362104747*^9}}],
 
 Cell[BoxData[
  RowBox[{"{", 
   RowBox[{
    RowBox[{"{", 
-    RowBox[{"\<\"kafka\"\>", ",", "0.9500043687105411`"}], "}"}], ",", 
+    RowBox[{"\<\"stoker\"\>", ",", "0.9115622501755309`"}], "}"}], ",", 
    RowBox[{"{", 
-    RowBox[{"\<\"dickens\"\>", ",", "0.8177635591040475`"}], "}"}], ",", 
+    RowBox[{"\<\"stoker\"\>", ",", "0.9456744950115754`"}], "}"}], ",", 
    RowBox[{"{", 
-    RowBox[{"\<\"grim\"\>", ",", "0.8172900206614782`"}], "}"}], ",", 
+    RowBox[{"\<\"dickens\"\>", ",", "0.9106090174310981`"}], "}"}], ",", 
    RowBox[{"{", 
-    RowBox[{"\<\"joyce\"\>", ",", "0.7903928886559203`"}], "}"}], ",", 
+    RowBox[{"\<\"stoker\"\>", ",", "0.9494155924613246`"}], "}"}], ",", 
    RowBox[{"{", 
-    RowBox[{"\<\"stoker\"\>", ",", "0.7596044777654354`"}], "}"}], ",", 
-   RowBox[{"{", 
-    RowBox[{"\<\"tolstoy\"\>", ",", "0.758247056845426`"}], "}"}], ",", 
-   RowBox[{"{", 
-    RowBox[{"\<\"twain\"\>", ",", "0.7352049953121262`"}], "}"}]}], 
+    RowBox[{"\<\"stoker\"\>", ",", "0.9433670949911577`"}], "}"}]}], 
   "}"}]], "Output",
- CellChangeTimes->{3.6607722483535967`*^9}]
-}, Open  ]],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"test3", "=", 
-   RowBox[{"measureFrequency", "[", 
-    RowBox[{
-    "\"\<http://www.gutenberg.org/cache/epub/98/pg98.txt\>\"", ",", " ", 
-     "10000", ",", " ", "1000"}], "]"}]}], ";"}]], "Input",
- CellChangeTimes->{{3.6607724944924707`*^9, 3.6607725377706623`*^9}}],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{"Sort", "[", 
-  RowBox[{
-   RowBox[{"Table", "[", 
-    RowBox[{
-     RowBox[{"{", 
-      RowBox[{
-       RowBox[{"vectorNames", "[", 
-        RowBox[{"[", "i", "]"}], "]"}], ",", " ", 
-       RowBox[{"computeSimilarity", "[", 
-        RowBox[{"test3", ",", " ", 
-         RowBox[{"vectors", "[", 
-          RowBox[{"[", "i", "]"}], "]"}]}], "]"}]}], "}"}], ",", " ", 
-     RowBox[{"{", 
-      RowBox[{"i", ",", " ", "1", ",", " ", 
-       RowBox[{"Length", "[", "vectors", "]"}]}], "}"}]}], "]"}], ",", " ", 
-   RowBox[{
-    RowBox[{
-     RowBox[{"#1", "[", 
-      RowBox[{"[", "2", "]"}], "]"}], ">", 
-     RowBox[{"#2", "[", 
-      RowBox[{"[", "2", "]"}], "]"}]}], " ", "&"}]}], "]"}]], "Input",
- CellChangeTimes->{{3.66077251671784*^9, 3.660772516749208*^9}}],
-
-Cell[BoxData[
- RowBox[{"{", 
-  RowBox[{
-   RowBox[{"{", 
-    RowBox[{"\<\"dickens\"\>", ",", "0.9226955645391602`"}], "}"}], ",", 
-   RowBox[{"{", 
-    RowBox[{"\<\"grim\"\>", ",", "0.8814097919214959`"}], "}"}], ",", 
-   RowBox[{"{", 
-    RowBox[{"\<\"stoker\"\>", ",", "0.8711089698888589`"}], "}"}], ",", 
-   RowBox[{"{", 
-    RowBox[{"\<\"joyce\"\>", ",", "0.860092649999866`"}], "}"}], ",", 
-   RowBox[{"{", 
-    RowBox[{"\<\"kafka\"\>", ",", "0.8150118121451045`"}], "}"}], ",", 
-   RowBox[{"{", 
-    RowBox[{"\<\"twain\"\>", ",", "0.7990442133677541`"}], "}"}], ",", 
-   RowBox[{"{", 
-    RowBox[{"\<\"tolstoy\"\>", ",", "0.7661519717753481`"}], "}"}]}], 
-  "}"}]], "Output",
- CellChangeTimes->{3.6607726983499002`*^9}]
-}, Open  ]],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"determineAuthor", "[", "data_", "]"}], ":=", 
-  RowBox[{"Sort", "[", 
-   RowBox[{
-    RowBox[{"Table", "[", 
-     RowBox[{
-      RowBox[{"{", 
-       RowBox[{
-        RowBox[{"vectorNames", "[", 
-         RowBox[{"[", "i", "]"}], "]"}], ",", " ", 
-        RowBox[{"computeSimilarity", "[", 
-         RowBox[{"data", ",", " ", 
-          RowBox[{"vectors", "[", 
-           RowBox[{"[", "i", "]"}], "]"}]}], "]"}]}], "}"}], ",", " ", 
-      RowBox[{"{", 
-       RowBox[{"i", ",", " ", "1", ",", " ", 
-        RowBox[{"Length", "[", "vectors", "]"}]}], "}"}]}], "]"}], ",", " ", 
-    RowBox[{
-     RowBox[{
-      RowBox[{"#1", "[", 
-       RowBox[{"[", "2", "]"}], "]"}], ">", 
-      RowBox[{"#2", "[", 
-       RowBox[{"[", "2", "]"}], "]"}]}], " ", "&"}]}], "]"}]}]], "Input",
- CellChangeTimes->{{3.660773075811767*^9, 3.660773094892591*^9}}],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"testDickens", "=", 
-   RowBox[{
-    RowBox[{
-     RowBox[{"measureFrequency", "[", 
-      RowBox[{
-      "\"\<http://www.gutenberg.org/cache/epub/98/pg98.txt\>\"", ",", " ", 
-       RowBox[{"1000", "*", "#"}], ",", " ", "1000"}], "]"}], "&"}], "/@", 
-    RowBox[{"Range", "[", 
-     RowBox[{"1", ",", "20"}], "]"}]}]}], ";"}]], "Input",
- CellChangeTimes->{{3.660773142328061*^9, 3.660773178758054*^9}}],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"resultsDickens", "=", 
-   RowBox[{
-    RowBox[{
-     RowBox[{"determineAuthor", "[", "#", "]"}], "&"}], "/@", 
-    "testDickens"}]}], ";"}]], "Input",
- CellChangeTimes->{{3.660773184587139*^9, 3.660773214533293*^9}}],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"testGrimm", "=", 
-   RowBox[{
-    RowBox[{
-     RowBox[{"measureFrequency", "[", 
-      RowBox[{
-      "\"\<http://www.gutenberg.org/cache/epub/2591/pg2591.txt\>\"", ",", " ", 
-       RowBox[{"1000", "*", "#"}], ",", " ", "1000"}], "]"}], "&"}], "/@", 
-    RowBox[{"Range", "[", 
-     RowBox[{"1", ",", "20"}], "]"}]}]}], ";"}]], "Input",
- CellChangeTimes->{{3.6607732544017773`*^9, 3.6607732661532173`*^9}, 
-   3.660773397074306*^9}],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"resultsGrimm", "=", 
-   RowBox[{
-    RowBox[{
-     RowBox[{"determineAuthor", "[", "#", "]"}], "&"}], "/@", "testGrimm"}]}],
-   ";"}]], "Input",
- CellChangeTimes->{{3.660773277858891*^9, 3.660773279783942*^9}, {
-  3.660773390222267*^9, 3.660773391352113*^9}}],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"measureAuthor", "[", 
-   RowBox[{"url_", ",", " ", "blockSize_", ",", " ", "blocks_"}], "]"}], ":=", 
-  RowBox[{"Module", "[", 
-   RowBox[{
-    RowBox[{"{", "test", "}"}], ",", "\[IndentingNewLine]", 
-    RowBox[{
-     RowBox[{"test", "=", 
-      RowBox[{
-       RowBox[{
-        RowBox[{"measureFrequency", "[", 
-         RowBox[{"url", ",", " ", 
-          RowBox[{"blockSize", "*", "#"}], ",", " ", "blockSize"}], "]"}], 
-        "&"}], "/@", 
-       RowBox[{"Range", "[", 
-        RowBox[{"1", ",", "blocks"}], "]"}]}]}], ";", "\[IndentingNewLine]", 
-     RowBox[{
-      RowBox[{
-       RowBox[{"determineAuthor", "[", "#", "]"}], "&"}], "/@", "test"}]}]}], 
-   "]"}]}]], "Input",
- CellChangeTimes->{{3.6607734108051147`*^9, 3.660773490048164*^9}}],
-
-Cell[BoxData[
- RowBox[{"measureAuthor", "[", 
-  RowBox[{
-  "\"\<http://www.gutenberg.org/cache/epub/76/pg76.txt\>\"", ",", " ", "500", 
-   ",", " ", "10"}], "]"}]], "Input",
- CellChangeTimes->{{3.660773510126648*^9, 3.660773538117278*^9}}]
+ CellChangeTimes->{3.660780214771348*^9}]
+}, Open  ]]
+}, Open  ]]
 },
 WindowSize->{1165, 851},
 WindowMargins->{{4, Automatic}, {0, Automatic}},
@@ -584,42 +465,41 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[558, 20, 440, 9, 28, "Input"],
-Cell[1001, 31, 583, 16, 28, "Input"],
-Cell[1587, 49, 2009, 53, 97, "Input"],
-Cell[3599, 104, 998, 26, 63, "Input"],
-Cell[4600, 132, 431, 9, 28, "Input"],
-Cell[5034, 143, 344, 8, 28, "Input"],
-Cell[5381, 153, 351, 8, 28, "Input"],
-Cell[5735, 163, 350, 8, 28, "Input"],
-Cell[6088, 173, 357, 8, 28, "Input"],
-Cell[6448, 183, 353, 8, 28, "Input"],
-Cell[6804, 193, 350, 8, 28, "Input"],
-Cell[7157, 203, 305, 7, 28, "Input"],
-Cell[7465, 212, 333, 8, 28, "Input"],
-Cell[7801, 222, 2670, 70, 97, "Input"],
-Cell[10474, 294, 365, 9, 28, "Input"],
-Cell[10842, 305, 400, 9, 28, "Input"],
 Cell[CellGroupData[{
-Cell[11267, 318, 837, 23, 28, "Input"],
-Cell[12107, 343, 723, 18, 28, "Output"]
+Cell[580, 22, 99, 1, 44, "Subsection"],
+Cell[682, 25, 440, 9, 28, "Input"],
+Cell[1125, 36, 583, 16, 28, "Input"],
+Cell[1711, 54, 2009, 53, 97, "Input"],
+Cell[3723, 109, 998, 26, 63, "Input"],
+Cell[4724, 137, 2670, 70, 97, "Input"],
+Cell[7397, 209, 876, 24, 46, "Input"],
+Cell[8276, 235, 787, 21, 63, "Input"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[12867, 366, 763, 22, 28, "Input"],
-Cell[13633, 390, 726, 18, 28, "Output"]
+Cell[9100, 261, 94, 1, 44, "Subsection"],
+Cell[9197, 264, 431, 9, 28, "Input"],
+Cell[9631, 275, 344, 8, 28, "Input"],
+Cell[9978, 285, 351, 8, 28, "Input"],
+Cell[10332, 295, 350, 8, 28, "Input"],
+Cell[10685, 305, 357, 8, 28, "Input"],
+Cell[11045, 315, 353, 8, 28, "Input"],
+Cell[11401, 325, 350, 8, 28, "Input"],
+Cell[11754, 335, 305, 7, 28, "Input"],
+Cell[12062, 344, 333, 8, 28, "Input"],
+Cell[12398, 354, 365, 9, 28, "Input"],
+Cell[12766, 365, 400, 9, 28, "Input"]
 }, Open  ]],
-Cell[14374, 411, 302, 7, 28, "Input"],
 Cell[CellGroupData[{
-Cell[14701, 422, 786, 22, 28, "Input"],
-Cell[15490, 446, 726, 18, 28, "Output"]
+Cell[13203, 379, 95, 1, 44, "Subsection"],
+Cell[CellGroupData[{
+Cell[13323, 384, 464, 12, 46, "Input"],
+Cell[13790, 398, 565, 14, 28, "Output"]
 }, Open  ]],
-Cell[16231, 467, 876, 24, 46, "Input"],
-Cell[17110, 493, 437, 11, 28, "Input"],
-Cell[17550, 506, 251, 7, 28, "Input"],
-Cell[17804, 515, 469, 12, 28, "Input"],
-Cell[18276, 529, 294, 8, 28, "Input"],
-Cell[18573, 539, 787, 21, 63, "Input"],
-Cell[19363, 562, 239, 5, 28, "Input"]
+Cell[CellGroupData[{
+Cell[14392, 417, 515, 13, 46, "Input"],
+Cell[14910, 432, 549, 14, 28, "Output"]
+}, Open  ]]
+}, Open  ]]
 }
 ]
 *)
